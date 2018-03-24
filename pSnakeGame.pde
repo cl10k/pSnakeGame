@@ -1,16 +1,18 @@
-//general refactoring
-//refactor all for-loops to a common style
-//Documentation of all elements
-//Title- & EndScreen
-//Score (Length & Time)
+//general refactoring esp. all for-loops to a common style
 //set private/public modifiers in all classes
-//timechallenge (difficulty=3)-> your timer is a mess! refactor it
-//rename to pSnake (Processing Snake), delete or Rename Repo, setup git again
-//add selector for difficulty in Titlescreen (easy, medium, hard) -> influences gameSpeed and Score via a multiplicator
-//zähle die Steps der Schlange. Je weniger Steps desto besserer Score
-//press space to start in titlescreen
-//rework credit & source url for extra font used
+//documentation of all elements
 
+//Title- & EndScreen
+  //add selector for difficulty in Titlescreen (easy, medium, hard, time)
+  //press space to start in titlescreen
+
+//Score
+  //Length of Snake & Time & steps taken
+  //count the steps taken, less steps = better score
+  //difficulty influences gameSpeed and Score via a multiplicator 
+
+//timechallenge (difficulty=3)
+  //your timer is a mess! refactor it
 
 cGame Game;
 cSound Sound;
@@ -25,7 +27,6 @@ int difficulty = 3; //0=easy, 1=medium, 2=hard,3=timechallenge
 boolean debugMode = true;
 PFont customFontScreen;
 PFont customFontTimer;
-
 
 
 void setup() {
