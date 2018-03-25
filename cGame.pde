@@ -7,9 +7,10 @@ class cGame {
   int arenaMaxX = width -2*rasterSize;
   int arenaMinY = rasterSize;
   int arenaMaxY = height -2*rasterSize;
-  int timerReference; //reference to when timer started its countdown
-  int timerStep = 5; //initial value of timer, at gamestart initialised with 20sec, later by a calculation
-  int timerCountdown; //progression of timer, at gamestart timer initialised with 20sec
+  cTimer XcountdownX = new cTimer(); //will replace the old timer implementation
+  int timerReference; //legacy : reference to when timer started its countdown
+  int timerStep = 10; //legacy : initial value of timer, at gamestart initialised with 20sec, later by a calculation
+  int timerCountdown; //legacy : progression of timer, at gamestart timer initialised with 20sec
   int timerDifficulty = 0; //used for progressing the timer to avoid a constant interval later on
 
   void drawCanvas() { //draws a colored border
@@ -90,8 +91,8 @@ class cGame {
   }
 
   void calcTimer(){
-    int passedTime = millis()-timerReference;
-    timerCountdown =  timerStep -passedTime/1000;
+    int passedTime = millis()- timerReference;
+    timerCountdown =  timerStep - passedTime/1000;
   }
 
   void resetTimer(){

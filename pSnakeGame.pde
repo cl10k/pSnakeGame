@@ -1,6 +1,6 @@
 //general refactoring esp. all for-loops to a common style
-//set private/public modifiers in all classes
-//documentation of all elements
+  //set private/public modifiers in all classes
+  //documentation of all elements
 
 //Title- & EndScreen
   //add selector for difficulty in Titlescreen (easy, medium, hard, time)
@@ -14,16 +14,22 @@
 //timechallenge (difficulty=3)
   //your timer is a mess! refactor it
 
+
+import java.util.Observable; //used for event handling
+import java.util.Observer; 
+
+
 cGame Game;
 cSound Sound;
 cSnake Snake;
 cFood Food;
-
+cTimer testTimer = new cTimer();
 
 int rasterSize = 20;
 int gameSpeed = 7; //=frameRate, works ok between 5-15
 int score;
 int difficulty = 3; //0=easy, 1=medium, 2=hard,3=timechallenge
+ArrayList<cTimer> timerList = new ArrayList<cTimer>();
 boolean debugMode = true;
 PFont customFontScreen;
 PFont customFontTimer;
@@ -41,10 +47,14 @@ void setup() {
   Sound = new cSound();
   Snake = new cSnake();
   Food = new cFood();
+  
+  
   Game.loadImages();  
   Snake.create();
   Food.create(Snake.body);
   Game.resetTimer(); //maybe move to a gamestart function later, right now it start at first draw, but it should start at first movement
+  testTimer.initialise("testTimer");
+  testTimer.start(10000,10);
 }
 
 
@@ -55,14 +65,17 @@ void draw() {
   } else {
     Game.drawCanvas();
     Food.show();
-  
+    
+    checkTimer(); //legacy
+    checkTimers(); //hier muss durch die Timerlist iteriert werden und alle timer müssen sich aktualisiern  
+    
     Snake.update();
     Snake.show();
     Sound.step();
   
     checkCollision(Snake.body[0]);
     checkFood(Snake.body[0],Food.position);
-    checkTimer();
+    
   }
 }
 
@@ -109,5 +122,17 @@ void checkTimer() {
       Snake.death();
       Sound.timeOut();
     }
+  }
+}
+
+void checkTimers() {
+  for (cTimer t : timerList) {
+    t.update();
+    println("Status " +t.getStatus());
+   }
+}
+
+class cLauscher implements Observer { //for testing purpose only
+  public void update(Observable obs, Object obj) {
   }
 }
