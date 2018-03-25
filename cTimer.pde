@@ -25,8 +25,17 @@ class cTimer extends Observable {
         timerRunning = true;
     }
 
-    int getStatus(){ //shows progession of timer
-        return passedTime;
+    boolean getStatus(){ //shows status of timer
+        return timerRunning;
+    }
+
+    int getTime(){ //shows progession of timer
+        if (timerRunning) {
+            return countdown - passedTime;
+        } else {
+            return -1;
+        }
+        
     }
 
     void eTick(){ //raises Event

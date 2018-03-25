@@ -128,7 +128,7 @@ void checkTimer() {
 void checkTimers() {
   for (cTimer t : timerList) {
     t.update();
-    println("Status " +t.getStatus());
+    println("Zeit " +t.getTime());
    }
 }
 

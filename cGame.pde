@@ -106,11 +106,15 @@ class cGame {
   void drawTimer(){
     textFont(customFontTimer);
     textAlign(CENTER, CENTER);
-    fill(0, 32, 32);
-    String tmpText = str(timerCountdown);
-    if (timerCountdown <10) {
-      tmpText = "0"+tmpText;
+    fill(0, 32, 32);   
+    text(formatTimer(timerCountdown), width/2, height/2);
+  }
+
+  String formatTimer(int tmpTimerCountdown){
+    if (tmpTimerCountdown < 10) {
+     return "0"+ str(tmpTimerCountdown);
+    } else {
+      return str(tmpTimerCountdown);
     }
-    text(tmpText, width/2, height/2);
   }
 }
