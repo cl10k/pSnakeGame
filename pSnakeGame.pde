@@ -1,3 +1,8 @@
+//Mach nicht den Fehler alle Elemente in DRAW immer wieder neu zu zeichnen.
+//Sachen die hauptsächlich statisch sind (der Hintergrund) sollten erst in einen Buffer kommen 
+//und dieser Buffer wird zunächst auf Veränderungen überprüft, ggf partiell aktualisiert und dann erst an draw übergeben!
+
+
 //general refactoring esp. all for-loops to a common style
   //set private/public modifiers in all classes
   //documentation of all elements
@@ -23,7 +28,7 @@ cGame Game;
 cSound Sound;
 cSnake Snake;
 cFood Food;
-cTimer testTimer = new cTimer();
+//cTimer testTimer = new cTimer();
 
 int rasterSize = 20;
 int gameSpeed = 7; //=frameRate, works ok between 5-15
@@ -53,8 +58,7 @@ void setup() {
   Snake.create();
   Food.create(Snake.body);
   Game.resetTimer(); //maybe move to a gamestart function later, right now it start at first draw, but it should start at first movement
-  testTimer.initialise("testTimer");
-  testTimer.start(10000,10);
+  //testTimer.start(10000,10);
 }
 
 
@@ -132,7 +136,19 @@ void checkTimers() {
    }
 }
 
-class cLauscher implements Observer { //for testing purpose only
-  public void update(Observable obs, Object obj) {
-  }
-}
+// class cLauscher implements Observer { //for testing purpose only
+//   private cTimer localTimer = null; //hier wird eine Variable für den zu überwachende Wert definiert
+  
+//   public  cLauncher(cTimer tmpTimer){ //Constructor mit direkter Zuweisung des zu überwachenden Wertes
+//      localTimer = tmpTimer;
+//   }
+  
+
+
+//   public void update(Observable obs, Object obj) {
+//     //called when the connected observable changes state and annoyces that by its notifyOberservers() Routine
+//     if (obs == localTimer) { //probe ob die gemeldete Statusänderung tatsächlich zum zu überwachenden Wert gehört (scheinbar werden bei Java alle zu überwachenden Werte in einer Liste gespeichert)
+//       println("Ich höre dich");
+//     }
+//   }
+// }
